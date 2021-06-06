@@ -17,22 +17,6 @@ class AvatarSeeder extends Seeder
      */
     public function run()
     {
-        /** @var User $user */
-        $user = User::factory()->create();
-
-        /** @var Avatar $avatar */
-        $avatar = $user->avatars()->first();
-
-        /** @var Item $sword */
-
-        $sword = Item::factory()->createOne([
-            'name'  => 'excalibur',
-        ]);
-
-        ItemOwnership::query()->create([
-            'avatar_id'     => $avatar->id,
-            'backpack_id'   => $avatar->backpack_id,
-            'item_id'       => $sword->id
-        ]);
+        //
     }
 }
