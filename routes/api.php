@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AvatarController;
+use App\Http\Controllers\UserController;
+use App\Models\Avatar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/user', [UserController::class, 'index']);
+
+    Route::apiResources([
+        'avatar'    => AvatarController::class
+    ]);
 });
+
+Route::post('/login', [UserController::class, 'login']);
