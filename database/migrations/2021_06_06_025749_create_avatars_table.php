@@ -19,6 +19,7 @@ class CreateAvatarsTable extends Migration
             $table->id();
             $table->foreignIdFor(User::class);
             $table->unsignedBigInteger('health_points')->default(100);
+            $table->json('position');
             $table->timestamps();
         });
     }

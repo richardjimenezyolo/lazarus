@@ -13,6 +13,39 @@ use Tests\TestCase;
 
 class AvatarTest extends TestCase
 {
+    protected const AVATAR_STRUCTURE = [
+        "data" => [
+            "id",
+            "user_id",
+            "health_points",
+            "backpack" => [
+                "id",
+                "avatar_id",
+                "created_at",
+                "updated_at",
+                "items" => [
+                    '*' => [
+                        "id",
+                        "avatar_id",
+                        "backpack_id",
+                        "item_id",
+                        "created_at",
+                        "updated_at",
+                        "item" => [
+                            "id",
+                            "name",
+                            "description",
+                            "hit_points",
+                            "defensive_points",
+                            "image",
+                            "created_at",
+                            "updated_at",
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ];
     /**
      * A basic feature test example.
      *
@@ -41,7 +74,7 @@ class AvatarTest extends TestCase
         Sanctum::actingAs($user);
 
         $response = $this->getJson("api/avatar/{$avatar->id}");
-        $response->dump();
         $response->assertOk();
+        $response->assertJsonStructure(self::AVATAR_STRUCTURE);
     }
 }

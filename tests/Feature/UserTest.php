@@ -50,7 +50,6 @@ class UserTest extends TestCase
             'name'  => $user->name,
             'email' => $user->email,
         ]);
-        $response->dump();
         $response->assertJsonCount(1, $response->json('avatars'));
     }
 }
